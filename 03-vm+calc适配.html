@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Title</title>
+        <style>
+            html {
+                font-size: 16px;
+            }
+            @media screen and (min-width: 375px) {
+                html {
+                    /* iPhone6的375px尺寸作为16px基准，414px正好18px大小, 600 20px */
+                    font-size: calc(100% + 2 * (100vw - 375px) / 39);
+                    font-size: calc(16px + 2 * (100vw - 375px) / 39);
+                }
+            }
+            @media screen and (min-width: 414px) {
+                html {
+                    /* 414px-1000px每100像素宽字体增加1px(18px-22px) */
+                    font-size: calc(112.5% + 4 * (100vw - 414px) / 586);
+                    font-size: calc(18px + 4 * (100vw - 414px) / 586);
+                }
+            }
+            @media screen and (min-width: 600px) {
+                html {
+                    /* 600px-1000px每100像素宽字体增加1px(20px-24px) */
+                    font-size: calc(125% + 4 * (100vw - 600px) / 400);
+                    font-size: calc(20px + 4 * (100vw - 600px) / 400);
+                }
+            }
+            @media screen and (min-width: 1000px) {
+                html {
+                    /* 1000px往后是每100像素0.5px增加 */
+                    font-size: calc(137.5% + 5 * (100vw - 1000px) / 1000);
+                    font-size: calc(22px + 5 * (100vw - 1000px) / 1000);
+                }
+            }
+            html, body {
+                margin: 0;
+                box-sizing: border-box;
+            }
+            .chat-item {
+                margin: 3.47vw 0;
+            }
+            .chat-item_details {
+                margin: 0 17.36vw;
+                padding: 1.39vw;
+            }
+            .chat-item_avatar {
+                position: absolute;
+                margin: 2.78vw;
+                width: 12.5vw;
+                height: 12.5vw;
+                border-radius: 50%;
+            }
+            .chat-details_title {
+                margin: 0;
+                font-size: .875rem;
+                line-height: 1.9;
+                font-weight: normal;
+                color: #909bab;
+            }
+            .chat-details_word {
+                position: relative;
+                margin: 0;
+                padding: 2.78vw 3.2vw;
+                display: inline-block;
+                line-height: 1.4;
+                color: #333;
+                background: #f2f5f9;
+                border-radius: 5px;
+            }
+            .chat-word_myself {
+                color: #fff;
+                background: #00afff;
+            }
+            [data-type-myself] {
+                direction: rtl;
+            }
+            [data-sign='left']::before {
+                position: absolute;
+                margin: -3.96vw -7.46vw;
+                content: '';
+                border-top: 3vw solid #f2f5f9;
+                width: 6vw;
+                height: 6vw;
+                display: block;
+                border-radius: 50%;
+                background: transparent;
+                transform: rotateZ(55deg);
+                z-index: -1;
+            }
+            [data-sign='right']::before {
+                position: absolute;
+                margin: -3.96vw -7.46vw;
+                content: '';
+                width: 6vw;
+                height: 6vw;
+                border-top: 3vw solid #00afff;
+                display: block;
+                border-radius: 50%;
+                background: transparent;
+                transform: rotateZ(-55deg);
+                z-index: -1;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="chat">
+            <div class="chat-item">
+                <img src="./assets/images/Avatar.png" alt="avatar" class="chat-item_avatar">
+                <div class="chat-item_details">
+                    <h3 class="chat-details_title">
+                        <span class="chat-details_title__user">提安全</span>
+                        <span class="chat-details_title__time">9月30日 21:47</span>
+                    </h3>
+                    <p class="chat-details_word" data-sign='left'>
+                        什么秘密,我觉得你现在跟我说什么都没有意义.
+                    </p>
+                </div>
+            </div>
+             <div class="chat-item">
+                <img src="./assets/images/Avatar (3).png" alt="avatar3" class="chat-item_avatar">
+                <div class="chat-item_details">
+                    <h3 class="chat-details_title">
+                        <span class="chat-details_title__user">淮南王玲</span>
+                        <span class="chat-details_title__time">10月8日 10:30</span>
+                    </h3>
+                    <p class="chat-details_word"  data-sign='left'>
+                        @蝴蝶蓝 优秀
+                    </p>
+                </div>
+            </div>
+             <div class="chat-item">
+                <img src="./assets/images/Avatar (1).png" alt="avatar1" class="chat-item_avatar">
+                <div class="chat-item_details">
+                    <h3 class="chat-details_title">
+                        <span class="chat-details_title__user">蝴蝶蓝</span>
+                        <span class="chat-details_title__time">昨天 22:13</span>
+                    </h3>
+                    <p class="chat-details_word"  data-sign='left'>
+                        值得一听~~
+                    </p>
+                </div>
+            </div>
+             <div class="chat-item" data-type-myself>
+                <img src="./assets/images/Avatar (2).png" alt="avatar2" class="chat-item_avatar">
+                <div class="chat-item_details">
+                    <h3 class="chat-details_title">
+                        <span class="chat-details_title__user">Y优秀Y</span>
+                        <span class="chat-details_title__time">刚刚</span>
+                    </h3>
+                    <p class="chat-details_word chat-word_myself" data-sign='right'>
+                        外观戏精现场
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
