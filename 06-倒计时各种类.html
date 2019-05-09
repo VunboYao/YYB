@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+</head>
+<body>
+<script>
+    /*  1.设定未来日期, 实现倒计时, 还有 XX 日 XX 时 XX 分 XX秒  */
+
+    /*
+    * 函数参数Object()
+    * 2个属性: start, end
+    * 分别是开始时间与结束时间 new Date(2019,4,10,11,10,5), start为空则默认为当前时间
+    * 返回对象,剩余时间 {day, hour, minute, second}
+    * */
+    class YybTimeDiffer {
+        constructor(obj) {
+            let startDate = obj.start || new Date();
+            let endDate = obj.end;
+            let seconds = Math.floor((endDate - startDate) / 1000);
+
+            /* 天 = 秒 / 24 * 60 * 60 */
+            let day = Math.floor(seconds / (24 * 60 * 60));
+
+            /*
+            * 剩余秒数 = 秒 % (24 * 60 * 60)
+            * 时 = 剩余秒数 / (60 * 60)
+            * */
+            let freeHSeconds = seconds % (24 * 60 * 60);
+            let hour = Math.floor(freeHSeconds / (60 * 60));
+
+            /*
+           * 剩余秒数 = 秒 % (60 * 60)
+           * 分 = 剩余秒数 / 60
+           * */
+            let freeMSeconds = seconds % (60 * 60);
+            let minute = Math.floor(freeMSeconds / 60);
+
+            /* 秒 = 秒 % 60 */
+            let second = seconds % 60;
+
+            return {day, hour, minute, second}
+        }
+    }
+
+    /* 设定固定时间点开始计时, 定点秒杀业务实现 */
+    let start = new Date(2019,4,10,6,0,0);
+    let end = new Date(2019,4,10,8,0,0); // 5月10号,早上6点到8点的秒杀倒计时
+    let tempInspection = false;
+    let valueStart = Math.floor(start.valueOf() / 1000);
+    let valueEnd = Math.floor(end.valueOf() / 1000);
+    // 定时器监听, 如果设定时间 === 当前时间
+    let timer = setInterval(() => {
+        if (valueStart === Math.floor(new Date().valueOf()/ 1000)) {
+            tempInspection = true;
+            clearInterval(timer);
+        }
+    },1000);
+
+    // 定时器,监听当变量为true, 开启倒计时
+    let timer2 = setInterval(() => {
+        if (tempInspection) {
+            if (new Date().valueOf() / 1000 >= valueEnd) {
+                clearInterval(timer2);// 清除定时器
+                return;
+            }
+            let a = new YybTimeDiffer({end});
+            console.log(a);
+        }
+    },1000)
+</script>
+</body>
+</html>
